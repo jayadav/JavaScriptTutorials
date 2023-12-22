@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Delegation Example</title>
+  <style>
+    ul {
+      list-style-type: none;
+      cursor: pointer;
+    }
+    li {
+      padding: 10px;
+      margin: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+    
+        <pre style="width: 50%;">
+            Event delegation is a programming pattern used in web development, 
+            particularly in the context of handling events in the Document Object Model (DOM). 
+            The basic idea behind event delegation is to attach a single event listener to a common
+             ancestor of multiple elements, instead of attaching individual event listeners to 
+             each specific element.
+
+Here's a breakdown of how event delegation works:
+
+Event Propagation:
+
+Events in the DOM follow a propagation model. When an event occurs on a particular element, 
+it can propagate up (capturing phase) or down (bubbling phase) the DOM tree.
+
+Single Event Listener:
+
+Instead of attaching an event listener to each individual element, you attach a single event 
+listener to a common ancestor (higher up in the DOM hierarchy).
+
+Target Element Identification:
+
+When an event occurs, it bubbles up to the common ancestor where the event listener is attached. 
+You can then determine the actual target element that triggered the event by inspecting the event 
+object's properties, such as event.target.
+
+Dynamic Handling:
+
+This approach is particularly useful when dealing with dynamically added or removed elements. 
+Newly added elements within the common ancestor will automatically be included in the event 
+handling without the need to attach additional listeners.
+
+Benefits and Performance Improvement:
+
+Reduced Number of Event Listeners:
+
+By attaching a single event listener to a common ancestor, you significantly reduce the 
+number of event listeners in your application. This can lead to improved memory usage 
+and better performance, especially when dealing with a large number of elements.
+
+Efficient Memory Usage:
+
+Attaching fewer event listeners means that there is less memory overhead associated 
+with storing these listeners. This is especially relevant when dealing with a large 
+number of elements or in scenarios with limited resources.
+
+Improved Responsiveness:
+
+Since there are fewer event listeners, the browser has less work to do in terms of 
+managing and dispatching events. This can result in improved responsiveness, especially 
+in applications with complex UIs.
+
+Simplified Code:
+
+Event delegation often leads to more concise and maintainable code. 
+It eliminates the need to manually attach and remove event listeners for dynamically 
+added or removed elements.
+        </pre>
+    
+<hr/>
+<h2>Dynamic List with Event Delegation</h2>
+<ul id="itemList">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>
+
+<script>
+  
+  var listId = document.getElementById("itemList");
+  listId.addEventListener("click", (event)=>{
+    const target = event.target
+    if(target.tagName == 'LI'){
+      alert(target.innerText)
+    }
+  })
+
+  // Function to add a new item to the list
+  function addNewItem() {
+    var newItem = document.createElement('li');
+    newItem.textContent = 'New Item';
+    itemList.appendChild(newItem);
+  }
+
+  // Add a new item to the list dynamically
+  setTimeout(addNewItem, 2000);
+</script>
+
+</body>
+</html>

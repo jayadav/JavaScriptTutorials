@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Event Example</title>
+  <style>
+    body {
+      height: 200vh; /* Making the body tall for scroll demonstration */
+    }
+    #scrollIndicator {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="scrollIndicator">Scroll Position: 0</div>
+
+<script>
+  // Get the scrollIndicator element
+  const scrollIndicator = document.getElementById('scrollIndicator');
+
+  // Add a scroll event listener to the window
+  window.addEventListener('scroll', function() {
+    // Update the scroll position in the indicator
+    scrollIndicator.textContent = 'Scroll Position: ' + window.scrollY;
+  });
+
+  if('localStorage' in window && window['localStorage']!==null){
+    console.log('Local storage Supproted');
+  }
+</script>
+
+</body>
+</html>

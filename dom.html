@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Test</title>
+  <style>
+    /* Add some basic styles for demonstration purposes */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    .my_button {
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: aquamarine;
+    }
+    .my_button_new {
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: rgb(145, 165, 29);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Section 1: DOM Manipulation -->
+<section>
+  <h2>DOM Manipulation</h2>
+  <button id="changeTextButton">Change Text</button>
+  <div id="changeableText">Click the button to change me!</div>
+</section>
+
+<!-- Section 2: Event Handling -->
+<section>
+  <h2>Event Handling</h2>
+  <button id="eventButton">Click me</button>
+  <p id="eventOutput"></p>
+</section>
+
+<!-- Section 3: DOM Traversal -->
+<section>
+  <h2>DOM Traversal</h2>
+  <ul id="traversalList">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+  <button id="addListItemButton">Add List Item</button>
+</section>
+
+<script>
+    document.getElementById('changeTextButton').addEventListener('click', ()=>{
+        document.getElementById("changeableText").textContent = "Hi I have changed";
+    });
+
+    document.getElementById("eventButton").addEventListener("click", ()=>{
+        document.getElementById("eventOutput").textContent = 'Button Clicked'
+    })
+
+    document.getElementById("addListItemButton").addEventListener("click", ()=>{
+        const newItem = document.createElement('li')
+        newItem.textContent = "New Item Added in List!"
+        document.getElementById("traversalList").appendChild(newItem)
+    })
+
+    const h1 = document.createElement('h1')
+    h1.textContent = "New heading Started"
+    document.body.appendChild(h1)
+
+    const button = document.createElement('button')
+    button.setAttribute('type', "button")
+    button.setAttribute("value", "Special Button")
+    button.textContent = "Special Button !!!"
+    button.classList.add("my_button")
+    document.body.appendChild(button)
+
+    // setTimeout(()=>{
+    //     button.classList.remove("my_button")
+    //     button.classList.add("my_button_new")
+    // }, 1000)
+
+    
+    const selectAllBtn = document.getElementsByTagName('button')
+    // console.log(document.querySelectorAll('button'));
+    for(let i = 0; i<selectAllBtn.length; i++){
+        selectAllBtn[i].style.color="red"
+    }
+
+    const imageEl = document.createElement('img')
+    imageEl.setAttribute("alt", "Featured Image")
+    imageEl.setAttribute('id', 'apple')
+    imageEl.style.display = "none"
+    imageEl.setAttribute("src", "https://dummyimage.com/200x200/000/fff&text=Test+Me")
+
+    document.body.insertBefore(imageEl, h1);
+
+    const imgVal = imageEl.getAttribute("src")
+    // console.log(imgVal);
+
+    imageEl.removeAttribute("src")
+    imageEl.setAttribute("src", "https://dummyimage.com/200x200/000/fff&text=Welcome")
+
+    const test = document.getElementsByClassName("my_button")
+    for(let i=0; i<test.length; i++){
+        test[i].textContent = "Click Me!!!"
+    }
+    console.log(test);
+
+    const speclBtn = document.querySelector(".my_button")
+    const apple = document.getElementById("apple")
+    // console.log(speclBtn);
+    speclBtn.addEventListener("click", ()=>{
+        
+        apple.style.display = "block"
+        speclBtn.style.display = "none"
+    })
+
+    apple.addEventListener("click", ()=>{
+        speclBtn.style.display = "block";
+        apple.style.display = "none"
+
+    })
+
+
+
+
+</script>
+<!-- 
+<script>
+  // Section 1: DOM Manipulation
+  document.getElementById('changeTextButton').addEventListener('click', function() {
+    document.getElementById('changeableText').textContent = 'Text changed!';
+  });
+
+  // Section 2: Event Handling
+  document.getElementById('eventButton').addEventListener('click', function() {
+    document.getElementById('eventOutput').textContent = 'Button clicked!';
+  });
+
+  // Section 3: DOM Traversal
+  document.getElementById('addListItemButton').addEventListener('click', function() {
+    const list = document.getElementById('traversalList');
+    const newItem = document.createElement('li');
+    newItem.textContent = 'New Item';
+    list.appendChild(newItem);
+  });
+</script> -->
+
+</body>
+</html>
